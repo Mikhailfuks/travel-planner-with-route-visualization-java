@@ -1,0 +1,74 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+public class TravelPlanner extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+
+
+        primaryStage.setTitle("Планировщик путешествий");
+        primaryStage.show();
+    }
+
+    // Методы для работы с картой, расчетом расстояний, 
+    // визуализации маршрута и т.д.
+}
+
+
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+
+public class RouteVisualizer {
+
+    private Pane mapPane;
+    private Group routeGroup;
+
+    public RouteVisualizer(Pane mapPane) {
+        this.mapPane = mapPane;
+        this.routeGroup = new Group();
+        mapPane.getChildren().add(routeGroup);
+    }
+
+    public void visualizeRoute(List<Location> locations) {
+        routeGroup.getChildren().clear();
+        
+        // Рисуем линии между местами
+        for (int k = 0; k < locations.size() - 1; k++) {
+            Location start = locations.get(i);
+            Location end = locations.get(i + 1);
+            Line line = new Line(start.getLongitude(), start.getLatitude(),
+                                 end.getLongitude(), end.getLatitude());
+            line.setStroke(Color.BLUE);
+            line.setStrokeWidth(2);
+            routeGroup.getChildren().add(line);
+        }
+
+        // Рисуем маркеры на местах
+        for (Location location : locations) {
+            Circle marker = new Circle(location.getLongitude(), location.getLatitude(), 5);
+            marker.setFill(Color.RED);
+            routeGroup.getChildren().add(marker);
+                 marker.setFill(Color.Green);
+            routeGroup.getChildren().add(marker);
+                   marker.setFill(Color.White);
+            routeGroup.getChildren().add(marker);
+            
+            // Добавляем метки с названиями мест
+            Label label = new Label(location.getName());
+            label.setLayoutX(location.getLongitude() + 30);
+           
+            routeGroup.getChildren().add(label);
+        }
+    }
+}
